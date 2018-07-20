@@ -7,10 +7,10 @@ const {ObjectID}=require('mongodb');
 //     console.log(results);
 // });
 
-ToDo.findByIdAndRemove('5b5167f053bad21d90e0538e').then((todo)=>{
+ToDo.findByIdAndRemove('5b517af8fb6fc069480ff2ed').then((todo)=>{
     console.log(todo);
 });
 
-ToDo.findOneAndRemove({_id:'5b5167f653bad21d90e0538f'}).then((todo)=>{
+ToDo.findOneAndRemove({_id:'5b517b65fb6fc069480ff313'}).then((todo)=>{
     console.log(todo);
 });
