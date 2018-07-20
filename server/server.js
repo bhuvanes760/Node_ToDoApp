@@ -5,8 +5,10 @@ const {ObjectID}=require('mongodb');
 var {mongoose}=require('./db/mongoose');
 var {Users}=require('./models/user');
 var {ToDo}=require('./models/todo');
+var app=express();
+const port=process.env.PORT || 3000;
 
-var app=express(); 
+
 app.use(bodyParser.json());
  app.post('/todos',(req,res)=>{
     var todo=new ToDo({
@@ -40,8 +42,24 @@ app.use(bodyParser.json());
     res.status(400).send(err)
      });
  });
-app.listen(3000,()=>{
-    console.log('Server is up on 3000');
+ app.delete('/todos/:id',(req,res)=>{
+     var id=req.params.id;
+
+     if(!ObjectID.isValid(id)){
+    return res.status(404).send();
+}
+     ToDo.findByIdAndRemove (id).then((todos)=>{
+         if(!todos){
+           return res.status(404).send();
+         }
+         res.send({todos})
+     }).catch((e)=>{
+    res.status(400).send(err)
+     });
+ });
+
+app.listen(port,()=>{
+    console.log(`Server is up on port ${port}`);
 });
 
 module.exports={app};
