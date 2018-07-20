@@ -48,7 +48,7 @@ app.use(bodyParser.json());
      if(!ObjectID.isValid(id)){
     return res.status(404).send();
 }
-     ToDo.findByIdAndRemove (id).then((todos)=>{
+     ToDo.findByIdAndRemove (id).the    n((todos)=>{
          if(!todos){
            return res.status(404).send();
          }
